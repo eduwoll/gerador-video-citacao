@@ -21,25 +21,19 @@ export class VideoController {
       // Decodifica a imagem em base64 para um arquivo temporário
       const imagePath = `${tmpDir}/image.jpeg`;
       const imageData = img.replace(/^data:image\/jpeg;base64,/, ``);
-      if (fs.existsSync(`${tmpDir}`)) {
-        fs.rm(`${tmpDir}`, { recursive: true }, () => null);
+      if (fs.existsSync(tmpDir)) {
+        fs.rmSync(tmpDir, { recursive: true });
       }
-      fs.mkdirSync(`${tmpDir}`);
+      fs.mkdirSync(tmpDir);
       fs.writeFileSync(imagePath, imageData, `base64`);
 
       // Une a imagem e o áudio em um vídeo usando o FFMPEG
-      const videoPath = `${tmpDir}/video.mp4`;
+      const videoPath = `${tmpDir}/video.mp4`; // Muda pra pasta do servidor que tu quiser
       await promisifiedExec(
-        `ffmpeg -loop 1 -i ${imagePath} -i ${audioUrl} -vf scale=720:-2 -c:v libx264 -tune stillimage -c:a aac -b:a 192k -pix_fmt yuv420p -shortest ${videoPath}`
+        `"node_modules\\ffmpeg-static\\ffmpeg" -loop 1 -i ${imagePath} -i ${audioUrl} -vf scale=720:-2 -c:v libx264 -tune stillimage -c:a aac -b:a 192k -pix_fmt yuv420p -shortest ${videoPath}`
       );
-
-      // Lê o vídeo em um buffer e retorna para o cliente
-      const videoBuffer = fs.readFileSync(videoPath);
-      res.writeHead(200, {
-        "Content-Type": "video/mp4",
-        "Content-Length": videoBuffer.length,
-      });
-      res.end(videoBuffer);
+      
+      res.status(200).send();
     } catch (error) {
       console.error(error);
 
