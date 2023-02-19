@@ -1,0 +1,24 @@
+{
+  "name": "node-express-ffmpeg",
+  "version": "1.0.0",
+  "description": "Server using Express, TypeScript, Zod and FFMPEG to join an image and an audio into a video.",
+  "main": "src/app.ts",
+  "scripts": {
+    "dev": "tsc && node dist/app.js --watch",
+    "start": "tsc && node dist/app.js"
+  },
+  "author": "Eduardo Woll",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "latest",
+    "cors": "^2.8.5",
+    "express": "latest",
+    "typescript": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/node": "latest",
+    "ffmpeg-static": "latest"
+  }
+}
