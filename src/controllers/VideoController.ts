@@ -19,8 +19,8 @@ export class VideoController {
       const { img, audioUrl } = createVideoSchema.parse(req.body);
 
       // Decodifica a imagem em base64 para um arquivo temporário
-      const imagePath = `${tmpDir}/image.jpeg`;
-      const imageData = img.replace(/^data:image\/jpeg;base64,/, ``);
+      const imagePath = `${tmpDir}/image.png`;
+      const imageData = img.replace(/^data:image\/png;base64,/, ``);
       if (fs.existsSync(tmpDir)) {
         fs.rmSync(tmpDir, { recursive: true });
       }
