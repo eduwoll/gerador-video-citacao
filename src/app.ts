@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json({limit: '50mb'}));
 
 const videoController = new VideoController();
-app.post("/", videoController.createVideo);
+app.get("/", videoController.createVideo);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000.");
