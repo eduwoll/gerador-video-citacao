@@ -54,7 +54,7 @@ export class VideoController {
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
 
-      await page.setViewport({ width: 720, height: 720, deviceScaleFactor: 1.5 });
+      await page.setViewport({ width: 720, height: 4000, deviceScaleFactor: 1.5 });
       await page.goto(`${imgPageUrl + target}`);
       await page.waitForSelector(selector);
 
